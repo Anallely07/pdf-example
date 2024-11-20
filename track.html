@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to PDF...</title>
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TVD8KHM6');
+    </script>
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TVD8KHM6"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Get the 'file' parameter from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const fileName = urlParams.get('file');
+
+            if (fileName) {
+                // Push the PDF view event to the GTM dataLayer
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'PDF View',
+                    'pdf_name': fileName
+                });
+
+                // Redirect to the specified file after tracking
+                const pdfURL = `https://yourwebsite.com/path-to/${fileName}`;
+                setTimeout(() => {
+                    window.location.href = pdfURL;
+                }, 3000); // 3-second delay before redirecting
+
+                // Display a message during the redirect
+                document.getElementById("message").innerHTML = `
+                    <p>Redirecting to your document: <strong>${fileName}</strong></p>
+                    <p>If you are not redirected, <a href="${pdfURL}">click here</a>.</p>
+                `;
+            } else {
+                // Handle missing 'file' parameter
+                document.getElementById("message").innerHTML = `
+                    <p>Error: No file specified. Please check the URL.</p>
+                `;
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="message">
+        <p>Loading...</p>
+    </div>
+</body>
+</html>
