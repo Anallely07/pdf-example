@@ -36,9 +36,7 @@
                 const pdfURL = `https://anallely07.github.io/pdf-example/${fileName}`;
 
                 // Redirect to the file after a brief delay
-                setTimeout(() => {
-                    window.location.href = pdfURL;
-                }, 3000);
+                window.location.href = pdfURL;
 
                 // Display a message during the redirect
                 document.getElementById("message").innerHTML = `
