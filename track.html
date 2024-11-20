@@ -19,23 +19,26 @@
     <!-- End Google Tag Manager -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Get the 'file' parameter from the URL
+            // Get the 'file' parameter and other query parameters
             const urlParams = new URLSearchParams(window.location.search);
             const fileName = urlParams.get('file');
+            const otherParams = urlParams.toString().replace(`file=${fileName}`, '');
 
             if (fileName) {
-                // Push the PDF view event to the GTM dataLayer
+                // Track the PDF view event in GTM or GA4
                 window.dataLayer = window.dataLayer || [];
                 window.dataLayer.push({
                     'event': 'PDF View',
                     'pdf_name': fileName
                 });
 
-                // Redirect to the specified file after tracking
-                const pdfURL = `https://anallely07.github.io/pdf-example/boletin_conagua/${fileName}`;
+                // Construct the URL to redirect the user to without any UTM parameters
+                const pdfURL = `https://anallely07.github.io/pdf-example/${fileName}`;
+
+                // Redirect to the file after a brief delay
                 setTimeout(() => {
                     window.location.href = pdfURL;
-                }, 3000); // 3-second delay before redirecting
+                }, 3000);
 
                 // Display a message during the redirect
                 document.getElementById("message").innerHTML = `
@@ -50,6 +53,8 @@
             }
         });
     </script>
+
+
 </head>
 <body>
     <div id="message">
